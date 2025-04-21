@@ -40,7 +40,11 @@ export default async function page({
         <h1 className="text-3xl font-bold text-center">{blog?.title}</h1>
 
         <div className="max-w-5xl mx-auto py-16">
-          <SimpleEditor editable={false} content={blog?.content} />
+          <SimpleEditor
+            editable={false}
+            content={blog?.content}
+            // className="bg-yellow-100"
+          />
         </div>
       </article>
     </>

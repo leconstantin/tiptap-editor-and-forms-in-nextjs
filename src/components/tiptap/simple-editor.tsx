@@ -11,6 +11,7 @@ import Image from "@tiptap/extension-image";
 import Typography from "@tiptap/extension-typography";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
+import Youtube from "@tiptap/extension-youtube";
 // import content from "@/components/tiptap/data/content.json";
 // --- Styles ---
 // import "@/components/tiptap/simple-editor.scss";
@@ -66,12 +67,15 @@ import { HighlighterIcon } from "@/components/tiptap-icons/highlighter-icon";
 import { LinkIcon } from "@/components/tiptap-icons/link-icon";
 import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon";
 import { cn } from "@/lib/utils";
+import { YoutubeButton } from "../tiptap-ui/youtube-button";
+import { ResponsiveYoutube } from "../tiptap-extensions/youtube-extension";
 // import Link from "@/components/tiptap-extensions/link-extension";
 
 interface SimpleEditorProps {
   content: string;
   onChange?: (content: string) => void;
   editable?: boolean;
+  className?: string;
 }
 const MainToolbarContent = ({
   onHighlighterClick,
@@ -137,14 +141,13 @@ const MainToolbarContent = ({
       <ToolbarGroup>
         <ImageUploadButton text="Add" />
       </ToolbarGroup>
+      <ToolbarGroup>
+        <YoutubeButton />
+      </ToolbarGroup>
 
       <Spacer />
 
       {isMobile && <ToolbarSeparator />}
-
-      {/* <ToolbarGroup>
-        <ModeToggle />
-      </ToolbarGroup> */}
     </>
   );
 };
@@ -178,6 +181,7 @@ export default function SimpleEditor({
   content,
   onChange,
   editable = true,
+  className,
 }: SimpleEditorProps) {
   const isMobile = useMobile();
   const windowSize = useWindowSize();
@@ -212,6 +216,7 @@ export default function SimpleEditor({
           class: "rounded-full",
         },
       }),
+      Selection,
       ImageUploadNode.configure({
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
@@ -222,6 +227,21 @@ export default function SimpleEditor({
       Typography,
       Superscript,
       Subscript,
+      ResponsiveYoutube.configure({
+        controls: false,
+        nocookie: true,
+        modestBranding: true,
+      }),
+      // Youtube.configure({
+      //   controls: false,
+      //   nocookie: true,
+      //   modestBranding: false,
+      //   allowFullscreen: false,
+      //   HTMLAttributes: {
+      //     class:
+      //       "rounded-lg ring-2 ring-muted hover:ring-blue-400 ease-in duration-200 text-center flex justify-center items-center",
+      //   },
+      // }),
       TrailingNode,
       Link.configure({ openOnClick: false }),
     ],
@@ -270,7 +290,7 @@ export default function SimpleEditor({
         </Toolbar>
       )}
 
-      <div className="w-full overflow-x-hidden">
+      <div className={cn("w-full overflow-x-hidden", className)}>
         <EditorContent
           editor={editor}
           role="presentation"
@@ -278,7 +298,7 @@ export default function SimpleEditor({
             "min-h-screen p-2 md:p-4 break-words whitespace-pre-wrap",
             editable
               ? "md:ring-1 md:ring-muted md:rounded-xs md:max-w-5xl mx-auto"
-              : ""
+              : "max-w-[58rem] mx-auto bg-blu-300"
           )}
         />
       </div>

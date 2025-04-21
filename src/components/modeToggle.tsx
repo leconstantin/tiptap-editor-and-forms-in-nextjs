@@ -9,6 +9,7 @@ export default function ModeToggle() {
 
   return (
     <Button
+      type="button"
       variant="outline"
       size="icon"
       className="rounded-full"

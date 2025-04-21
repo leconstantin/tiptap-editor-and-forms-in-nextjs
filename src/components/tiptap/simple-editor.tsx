@@ -142,9 +142,9 @@ const MainToolbarContent = ({
 
       {isMobile && <ToolbarSeparator />}
 
-      <ToolbarGroup>
+      {/* <ToolbarGroup>
         <ModeToggle />
-      </ToolbarGroup>
+      </ToolbarGroup> */}
     </>
   );
 };
@@ -251,8 +251,6 @@ export default function SimpleEditor({
             isMobile
               ? {
                   bottom: `calc(100% - ${windowSize.height - rect.y}px)`,
-                  position: "sticky",
-                  top: "0",
                 }
               : {}
           }
@@ -272,13 +270,15 @@ export default function SimpleEditor({
         </Toolbar>
       )}
 
-      <div className="">
+      <div className="w-full overflow-x-hidden">
         <EditorContent
           editor={editor}
           role="presentation"
           className={cn(
-            "min-h-screen max-w-5xl mx-auto p-4 ",
-            editable ? "bg-white/15 ring-1 ring-muted rounded-xs" : ""
+            "min-h-screen p-2 md:p-4 break-words whitespace-pre-wrap",
+            editable
+              ? "md:ring-1 md:ring-muted md:rounded-xs md:max-w-5xl mx-auto"
+              : ""
           )}
         />
       </div>

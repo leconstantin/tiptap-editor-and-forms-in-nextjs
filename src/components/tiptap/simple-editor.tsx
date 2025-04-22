@@ -1,20 +1,6 @@
 "use client";
 import React, { useCallback, useEffect } from "react";
 import { useEditor, EditorContent, EditorContext } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import TaskList from "@tiptap/extension-task-list";
-import TaskItem from "@tiptap/extension-task-item";
-import Highlight from "@tiptap/extension-highlight";
-import Image from "@tiptap/extension-image";
-import Typography from "@tiptap/extension-typography";
-import Superscript from "@tiptap/extension-superscript";
-import Subscript from "@tiptap/extension-subscript";
-import Youtube from "@tiptap/extension-youtube";
-// import content from "@/components/tiptap/data/content.json";
-// --- Styles ---
-// import "@/components/tiptap/simple-editor.scss";
 
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button";
@@ -25,10 +11,8 @@ import {
   ToolbarSeparator,
 } from "@/components/tiptap-ui-primitive/toolbar";
 
-import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils";
-
 // --- Tiptap Node ---
-import { ImageUploadNode } from "@/components/tiptap-node/image-upload-node/image-upload-node-extension";
+
 import "@/components/tiptap-node/code-block-node/code-block-node.scss";
 import "@/components/tiptap-node/list-node/list-node.scss";
 import "@/components/tiptap-node/image-node/image-node.scss";
@@ -53,14 +37,9 @@ import { MarkButton } from "@/components/tiptap-ui/mark-button";
 import { TextAlignButton } from "@/components/tiptap-ui/text-align-button";
 import { UndoRedoButton } from "@/components/tiptap-ui/undo-redo-button";
 
-// --- Custom Extensions ---
-import { Link } from "@/components/tiptap-extensions/link-extension";
-import { Selection } from "@/components/tiptap-extensions/selection-extension";
-import { TrailingNode } from "@/components/tiptap-extensions/trailing-node-extension";
 // --- Hooks ---
 import { useMobile } from "@/hooks/use-mobile";
 import { useWindowSize } from "@/hooks/use-window-size";
-import ModeToggle from "../modeToggle";
 
 // --- Icons ---
 import { HighlighterIcon } from "@/components/tiptap-icons/highlighter-icon";
@@ -68,8 +47,7 @@ import { LinkIcon } from "@/components/tiptap-icons/link-icon";
 import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon";
 import { cn } from "@/lib/utils";
 import { YoutubeButton } from "../tiptap-ui/youtube-button";
-import { ResponsiveYoutube } from "../tiptap-extensions/youtube-extension";
-// import Link from "@/components/tiptap-extensions/link-extension";
+import { commonExtensions } from "../tiptap-extensions/extensions";
 
 interface SimpleEditorProps {
   content: string;
@@ -180,7 +158,7 @@ const MobileToolbarContent = ({
 export default function SimpleEditor({
   content,
   onChange,
-  editable = true,
+  editable = false,
   className,
 }: SimpleEditorProps) {
   const isMobile = useMobile();
@@ -193,8 +171,9 @@ export default function SimpleEditor({
   React.useEffect(() => {
     setRect(document.body.getBoundingClientRect());
   }, []);
+
   const editor = useEditor({
-    editable: editable,
+    editable,
     immediatelyRender: false,
     editorProps: {
       attributes: {
@@ -204,47 +183,7 @@ export default function SimpleEditor({
         "aria-label": "Main content area, start typing to enter text.",
       },
     },
-    extensions: [
-      StarterKit,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Underline,
-      TaskList,
-      TaskItem.configure({ nested: true }),
-      Highlight.configure({ multicolor: true }),
-      Image.configure({
-        HTMLAttributes: {
-          class: "rounded-full",
-        },
-      }),
-      Selection,
-      ImageUploadNode.configure({
-        accept: "image/*",
-        maxSize: MAX_FILE_SIZE,
-        limit: 3,
-        upload: handleImageUpload,
-        onError: (error) => console.error("Upload failed:", error),
-      }),
-      Typography,
-      Superscript,
-      Subscript,
-      ResponsiveYoutube.configure({
-        controls: false,
-        nocookie: true,
-        modestBranding: true,
-      }),
-      // Youtube.configure({
-      //   controls: false,
-      //   nocookie: true,
-      //   modestBranding: false,
-      //   allowFullscreen: false,
-      //   HTMLAttributes: {
-      //     class:
-      //       "rounded-lg ring-2 ring-muted hover:ring-blue-400 ease-in duration-200 text-center flex justify-center items-center",
-      //   },
-      // }),
-      TrailingNode,
-      Link.configure({ openOnClick: false }),
-    ],
+    extensions: commonExtensions,
     content: content,
     onUpdate: ({ editor }) => {
       if (onChange) onChange(editor.getHTML());

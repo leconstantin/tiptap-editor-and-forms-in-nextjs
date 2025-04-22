@@ -66,11 +66,16 @@
   --tt-brand-color-100: rgba(222, 219, 255, 1);
   --tt-brand-color-200: rgba(195, 189, 255, 1);
   --tt-brand-color-300: rgba(157, 138, 255, 1);
-  --tt-brand-color-400: rgba(122, 82, 255, 1);
-  --tt-brand-color-500: rgba(98, 41, 255, 1);
-  --tt-brand-color-600: rgba(84, 0, 229, 1);
-  --tt-brand-color-700: rgba(75, 0, 204, 1);
-  --tt-brand-color-800: rgba(56, 0, 153, 1);
+  // --tt-brand-color-400: rgba(122, 82, 255, 1);
+  // --tt-brand-color-500: rgba(98, 41, 255, 1);
+  // --tt-brand-color-600: rgba(84, 0, 229, 1);
+  // --tt-brand-color-700: rgba(75, 0, 204, 1);
+  // --tt-brand-color-800: rgba(56, 0, 153, 1);
+  --tt-brand-color-400: #a98eff; /* Light & vibrant — good on dark */
+  --tt-brand-color-500: #855eff; /* Base brand color — works on both */
+  --tt-brand-color-600: #6a3dff; /* Strong contrast — buttons/links */
+  --tt-brand-color-700: #4b24d6; /* Text on light backgrounds */
+  --tt-brand-color-800: #32188f; /* Dark backgrounds / accents */
   --tt-brand-color-900: rgba(43, 25, 102, 1);
   --tt-brand-color-950: hsla(257, 100%, 9%, 1);
 
@@ -123,8 +128,7 @@
   ******************/
 
   /* Shadows Light */
-  --tt-shadow-elevated-md:
-    0px 16px 48px 0px rgba(17, 24, 39, 0.04),
+  --tt-shadow-elevated-md: 0px 16px 48px 0px rgba(17, 24, 39, 0.04),
     0px 12px 24px 0px rgba(17, 24, 39, 0.04),
     0px 6px 8px 0px rgba(17, 24, 39, 0.02),
     0px 2px 3px 0px rgba(17, 24, 39, 0.02);
@@ -200,7 +204,7 @@
   --tt-card-bg-color: var(--tt-gray-dark-50);
   --tt-card-border-color: var(--tt-gray-dark-a-50);
 
-  --tt-shadow-elevated-md:
-    0px 16px 48px 0px rgba(0, 0, 0, 0.5), 0px 12px 24px 0px rgba(0, 0, 0, 0.24),
-    0px 6px 8px 0px rgba(0, 0, 0, 0.22), 0px 2px 3px 0px rgba(0, 0, 0, 0.12);
+  --tt-shadow-elevated-md: 0px 16px 48px 0px rgba(0, 0, 0, 0.5),
+    0px 12px 24px 0px rgba(0, 0, 0, 0.24), 0px 6px 8px 0px rgba(0, 0, 0, 0.22),
+    0px 2px 3px 0px rgba(0, 0, 0, 0.12);
 }

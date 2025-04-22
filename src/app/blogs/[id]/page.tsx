@@ -41,7 +41,7 @@ export default async function page({
 
         <div className="max-w-5xl mx-auto py-16">
           <SimpleEditor
-            editable={false}
+            // editable={false}
             content={blog?.content}
             // className="bg-yellow-100"
           />

@@ -129,6 +129,7 @@ export default function EditorForm() {
                 <FormLabel className="sr-only">Content</FormLabel>
                 <FormControl>
                   <SimpleEditor
+                    editable={true}
                     content={field.value}
                     onChange={handleEditorChange}
                   />

@@ -8,6 +8,9 @@ import Image from "@tiptap/extension-image";
 import Typography from "@tiptap/extension-typography";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
+import { Color } from "@tiptap/extension-color";
+import TextStyle from "@tiptap/extension-text-style";
+import CharacterCount from "@tiptap/extension-character-count";
 
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils";
 import TrailingNode from "./trailing-node-extension";
@@ -22,6 +25,8 @@ export const commonExtensions = [
   TextAlign.configure({ types: ["heading", "paragraph"] }),
   Underline,
   TaskList,
+  TextStyle,
+  Color,
   TaskItem.configure({ nested: true }),
   Highlight.configure({ multicolor: true }),
   Image.configure({
@@ -40,6 +45,7 @@ export const commonExtensions = [
   Typography,
   Superscript,
   Subscript,
+  CharacterCount,
   Youtube.configure({
     controls: false,
     nocookie: true,

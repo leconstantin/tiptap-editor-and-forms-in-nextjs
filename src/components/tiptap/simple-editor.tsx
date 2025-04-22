@@ -1,6 +1,11 @@
 "use client";
 import React, { useCallback, useEffect } from "react";
-import { useEditor, EditorContent, EditorContext } from "@tiptap/react";
+import {
+  useEditor,
+  EditorContent,
+  EditorContext,
+  FloatingMenu,
+} from "@tiptap/react";
 
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button";
@@ -48,6 +53,8 @@ import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon";
 import { cn } from "@/lib/utils";
 import { YoutubeButton } from "../tiptap-ui/youtube-button";
 import { commonExtensions } from "../tiptap-extensions/extensions";
+import ColorSelectorButton from "../tiptap-ui/color-selector";
+import { Badge } from "../ui/badge";
 
 interface SimpleEditorProps {
   content: string;
@@ -99,6 +106,10 @@ const MainToolbarContent = ({
       </ToolbarGroup>
 
       <ToolbarSeparator />
+      <ToolbarGroup>
+        <ColorSelectorButton />
+      </ToolbarGroup>
+      <ToolbarSeparator />
 
       <ToolbarGroup>
         <MarkButton type="superscript" />
@@ -119,6 +130,7 @@ const MainToolbarContent = ({
       <ToolbarGroup>
         <ImageUploadButton text="Add" />
       </ToolbarGroup>
+
       <ToolbarGroup>
         <YoutubeButton />
       </ToolbarGroup>
@@ -228,8 +240,44 @@ export default function SimpleEditor({
           )}
         </Toolbar>
       )}
+      <div className="fixed bottom-10 right-2 flex flex-col gap-2 max-w-xs z-10">
+        <Badge
+          variant="secondary"
+          className="truncate whitespace-nowrap overflow-hidden text-ellipsis px-3 py-1"
+        >
+          {editor && editor.storage.characterCount.characters()} characters
+        </Badge>
+        <Badge className="truncate whitespace-nowrap overflow-hidden text-ellipsis px-3 py-1">
+          {editor && editor.storage.characterCount.words()} words
+        </Badge>
+      </div>
 
       <div className={cn("w-full overflow-x-hidden", className)}>
+        {/* {editor && (
+          <FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
+            <Toolbar className="w-full bg-amber-300">
+              <ToolbarGroup>
+                <HeadingDropdownMenu levels={[1, 2, 3, 4]} />
+                <ListDropdownMenu
+                  types={["bulletList", "orderedList", "taskList"]}
+                />
+                <NodeButton type="codeBlock" />
+                <NodeButton type="blockquote" />
+              </ToolbarGroup>
+
+              <ToolbarSeparator />
+
+              <ToolbarGroup>
+                <MarkButton type="bold" />
+                <MarkButton type="italic" />
+              </ToolbarGroup>
+              <ToolbarSeparator />
+              <ToolbarGroup>
+                <ColorSelectorButton />
+              </ToolbarGroup>
+            </Toolbar>
+          </FloatingMenu>
+        )} */}
         <EditorContent
           editor={editor}
           role="presentation"
